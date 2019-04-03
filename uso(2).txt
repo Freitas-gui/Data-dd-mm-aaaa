@@ -1,0 +1,32 @@
+package exercicio01;
+
+public class uso {
+	public static void main(String args[]) {
+		
+		//equals e mes string
+		data x= new data(20,"abril",2020);
+		System.out.println(x);
+		data y= new data(20,"abril",2020);
+		System.out.println(y);
+		System.out.println(x.equals(y));
+		//equals e mes string
+		
+		//data passada por 3 inteiros
+		data a= new data(19,04,2019);
+		System.out.println(a);
+		//data passada por 3 inteiros
+		
+		//data pasada sem dia
+		data b= new data(04,2019);
+		System.out.println(b);
+		//data pasada sem dia
+		
+		//ano muito antigo
+		data c= new data(02,04,1442);
+		System.out.println(c);
+		
+		//string "dd/mm/aaaa"
+		data d= new data("02/04/2019");
+		System.out.println(d);
+	}
+}
