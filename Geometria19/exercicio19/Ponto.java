@@ -1,0 +1,146 @@
+package exercicio19;
+
+public class Ponto {
+	//campos
+	public final static double LIMITEINFERIORDEFAULT=0,LIMITESUPERIORDEFAULT=500;
+	private static double limiteInf=Ponto.LIMITEINFERIORDEFAULT;
+	private static double limiteSup=Ponto.LIMITESUPERIORDEFAULT;
+	private double x,y;
+	
+	//construtores
+	public Ponto(double _x, double _y) throws Exception{
+		this.setX(_x);
+		this.setY(_y);
+	}
+	public Ponto (String _xy)throws Exception {
+		this.setX(_xy);
+		this.setY(_xy);
+	}
+	public Ponto()throws Exception {
+		this.setX(0);
+		this.setY(0);
+	}
+	
+	// metodos interface para Limites
+	public static double getLimiteInf() {
+		return limiteInf;
+	}
+	public static void setLimiteInf(double limiteInf) {
+		Ponto.limiteInf = limiteInf;
+	}
+	public static double getLimiteSup() {
+		return limiteSup;
+	}
+	public static void setLimiteSup(double limiteSup) {
+		Ponto.limiteSup = limiteSup;
+	}
+	
+	//metodos de interface get
+	
+	public double getX() {
+		return this.x;
+	}
+	public double getY() {
+		return this.y;
+	}
+	
+	//metodos de interface set e throw
+	public void setX(double _x)throws Exception{
+		if(_x>=Ponto.limiteInf && _x<=Ponto.limiteSup)
+			this.x=_x;
+		else
+			throw new Exception ("Fora do limite");
+	}
+	
+	public void setY(double _y)throws Exception{
+		if(_y>=Ponto.limiteInf && _y<=Ponto.limiteSup)
+			this.y=_y;
+		else
+			throw new Exception ("Fora do limite");
+	}
+	
+	public void setX(String _xy)throws Exception{
+		int i=_xy.indexOf(",");
+		double aux;
+		aux=Double.parseDouble(_xy.substring(0,i));
+		this.x=aux;
+	}
+	public void setY(String _xy)throws Exception{
+		int i=_xy.indexOf(",");
+		double aux;
+		aux=Double.parseDouble(_xy.substring(i+1));
+		this.y=aux;
+	}
+	
+	
+	
+	
+	
+	//retorna um novo objeto com os mesmos valores da instancia usada na chamada do metodo
+	public Ponto clona() throws Exception{
+		Ponto clone= new Ponto(this.x,this.y);
+		return clone;
+	}
+	//retorna um novo objeto com os  valores x,y trocados: da instancia usada na chamada do metodo
+	public Ponto criaSwap()throws Exception{
+		Ponto swap= new Ponto(this.y,this.x);
+		return swap;
+	}
+	//verifica se a coordenada y e/ou x de um objeto chamado no metodo é igual a coordenada y e/ou x de outro objeto passado como argumento
+	public boolean temEixoComum(Ponto _xy){
+		if (this.x==_xy.getX() || this.y==_xy.getY())
+			return true;
+		else
+			return false;
+	}
+	//calcula a distancia euclidiana ente um Ponto usado na chamada do metodo e outro passado como objeto
+	public double distancia(Ponto _xy) {
+		double d= Math.sqrt((this.x-_xy.getX())*(this.x-_xy.getX())+(this.y-_xy.getY())*(this.y-_xy.getY()));
+		return d;
+	}
+	public double distancia(double _x , double _y) {
+		double d= Math.sqrt((this.x-_x)*(this.x-_x)+(this.y-_y)*(this.y-_y));
+		return d;
+	}
+	public static double distancia(double _x1 , double _y1 , double _x2 , double _y2) {
+		double d= Math.sqrt((_x1-_x2)*(_x1-_x2)+(_y1-_y2)*(_y1-_y2));
+		return d;
+	}
+	public static double distancia(Ponto _xy1 , Ponto _xy2) {
+		double d= Math.sqrt((_xy1.getX()-_xy2.getX())*(_xy1.getX()-_xy2.getX())+(_xy1.getY()-_xy2.getY())*(_xy1.getY()-_xy2.getY()));
+		return d;
+	}
+	public double distanciaDaOrigem() {
+		double d= Math.sqrt((this.x-0)*(this.x-0)+(this.y-0)*(this.y-0));
+		return d;
+	}
+	
+	//equals
+		public boolean equals(Ponto _xy) {
+			if (this.x==_xy.getX() && this.y==_xy.getY())
+				return true;
+			else 
+				return false;
+		}
+	
+	public int compareTo(Ponto _xy) {
+		if(this.distanciaDaOrigem()>_xy.distanciaDaOrigem())
+			return 1;
+		else if(this.distanciaDaOrigem()<_xy.distanciaDaOrigem())
+			return -1;
+		else
+			return 0;
+	}
+	
+
+	//toString
+	public String toString() {
+		StringBuilder dados=new StringBuilder();
+		dados.append("(");
+		dados.append(this.getX());
+		dados.append(",");
+		dados.append(this.getY());
+		dados.append(")");
+		return dados.toString();
+	}
+}
